@@ -1,4 +1,3 @@
-title: My Awesome Home
 views:
     # View tab title.
   - title: Example
@@ -9,6 +8,20 @@ views:
         title: Lovelace
         content: >
           Welcome to your **Lovelace UI**.
+      - type: map
+        aspect_ratio: 100%
+        default_zoom: 15
+        entities:
+          - device_tracker.Phone_Tom
+          - zone.home
+    - title: Example2
+    # Makes the first card fill the view
+    cards:
+        # The markdown card will render markdown text.
+      - type: markdown
+        title: Lovelace
+        content: >
+          Welcome to your **Lovelace UI 2**.
       - type: map
         aspect_ratio: 100%
         default_zoom: 15

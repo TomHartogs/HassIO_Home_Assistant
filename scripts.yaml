@@ -1,0 +1,22 @@
+christmas_one:
+  sequence:
+  - service: light.turn_on
+    data:
+      entity_id: light.hue_color_lamp_1
+      color_name: red
+  - delay:
+      seconds: '{{ (range(2, 5)|random) }}'
+  - service: script.turn_on
+    data:
+      entity_id: script.christmas_two
+christmas_two:
+  sequence:
+  - service: light.turn_on
+    data:
+      entity_id: light.hue_color_lamp_1
+      color_name: green
+  - delay:
+      seconds: '{{ (range(1, 4)|random) }}'
+  - service: script.turn_on
+    data:
+      entity_id: script.christmas_one

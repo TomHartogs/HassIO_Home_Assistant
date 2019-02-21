@@ -1,4 +1,15 @@
 - name: Home
   latitude: !secret home_latitude
   longitude: !secret home_longitude
-  radius: 50
+  radius: 25
+  
+- name: Over4
+  latitude: !secret over4_latitude
+  longitude: !secret over4_longitude
+  radius: 25
+
+
+- name: Kaufland
+  latitude: !secret kaufland_latitude
+  longitude: !secret kaufland_longitude
+  radius: 100
