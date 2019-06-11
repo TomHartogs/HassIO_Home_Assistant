@@ -8,8 +8,12 @@
   longitude: !secret over4_longitude
   radius: 25
 
-
 - name: Kaufland
   latitude: !secret kaufland_latitude
   longitude: !secret kaufland_longitude
   radius: 100
+
+- name: Ion_Mincu
+  latitude: !secret Ion_Mincu_latitude
+  longitude: !secret Ion_Mincu_longitude
+  radius: 50
