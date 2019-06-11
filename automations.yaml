@@ -19,98 +19,144 @@
     entity_id: switch.power_strip
 - id: Sunset_lights_1
   alias: Sunset_lights_1
-  initial_state: 'on'
   trigger:
-  - platform: sun
-    event: sunset
+  - event: sunset
     offset: -00:30:00
-  - platform: state
-    entity_id: group.all_devices
+    platform: sun
+  - entity_id: person.delia
     from: not_home
+    platform: state
+    to: home
+  - entity_id: person.tom
+    from: not_home
+    platform: state
     to: home
   condition:
-  - condition: state
-    entity_id: group.all_devices
-    state: home
-  - condition: sun
-    after: sunset
-    after_offset: -00:30:00
+  - condition: and
+    conditions:
+      - condition: sun
+        after: sunset
+        after_offset: -00:30:00
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: person.delia
+          state: home
+        - condition: state
+          entity_id: person.tom
+          state: home
   action:
-    service: light.turn_on
-    data:
-      entity_id: light.living_room
+  - data:
       brightness_pct: 25
+      entity_id: light.living_room
       transition: 600
+      kelvin: 2700
+    service: light.turn_on
+  initial_state: 'on'
 - id: Sunset_lights_2
   alias: Sunset_lights_2
-  initial_state: 'on'
   trigger:
-  - platform: sun
-    event: sunset
+  - event: sunset
     offset: -00:20:00
-  - platform: state
-    entity_id: group.all_devices
+    platform: sun
+  - entity_id: person.delia
     from: not_home
+    platform: state
+    to: home
+  - entity_id: person.tom
+    from: not_home
+    platform: state
     to: home
   condition:
-  - condition: state
-    entity_id: group.all_devices
-    state: home
-  - condition: sun
-    after: sunset
-    after_offset: -00:20:00
+  - condition: and
+    conditions:
+      - condition: sun
+        after: sunset
+        after_offset: -00:20:00
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: person.delia
+          state: home
+        - condition: state
+          entity_id: person.tom
+          state: home
   action:
-    service: light.turn_on
-    data:
-      entity_id: light.living_room
+  - data:
       brightness_pct: 50
+      entity_id: light.living_room
       transition: 600
+      kelvin: 2700
+    service: light.turn_on
+  initial_state: 'on'
 - id: Sunset_lights_3
   alias: Sunset_lights_3
-  initial_state: 'on'
   trigger:
-  - platform: sun
-    event: sunset
+  - event: sunset
     offset: -00:10:00
-  - platform: state
-    entity_id: group.all_devices
+    platform: sun
+  - entity_id: person.delia
     from: not_home
+    platform: state
+    to: home
+  - entity_id: person.tom
+    from: not_home
+    platform: state
     to: home
   condition:
-  - condition: state
-    entity_id: group.all_devices
-    state: home
-  - condition: sun
-    after: sunset
-    after_offset: -00:10:00
+  - condition: and
+    conditions:
+      - condition: sun
+        after: sunset
+        after_offset: -00:10:00
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: person.delia
+          state: home
+        - condition: state
+          entity_id: person.tom
+          state: home
   action:
-    service: light.turn_on
-    data:
-      entity_id: light.living_room
+  - data:
       brightness_pct: 75
+      entity_id: light.living_room
       transition: 600
+      kelvin: 2700
+    service: light.turn_on
+  initial_state: 'on'
 - id: Sunset_lights_4
   alias: Sunset_lights_4
-  initial_state: 'on'
   trigger:
-  - platform: sun
-    event: sunset
-  - platform: state
-    entity_id: group.all_devices
+  - event: sunset
+    platform: sun
+  - entity_id: person.delia
     from: not_home
+    platform: state
+    to: home
+  - entity_id: person.tom
+    from: not_home
+    platform: state
     to: home
   condition:
-  - condition: state
-    entity_id: group.all_devices
-    state: home
-  - condition: sun
-    after: sunset
+  - condition: or
+    conditions:
+      - condition: state
+        entity_id: person.delia
+        state: home
+      - condition: state
+        entity_id: person.tom
+        state: home
+  - after: sunset
+    condition: sun
   action:
-    service: light.turn_on
-    data:
-      entity_id: light.living_room
+  - data:
       brightness_pct: 100
+      entity_id: light.living_room
       transition: 600
+      kelvin: 2700
+    service: light.turn_on
+  initial_state: 'on'
 - id: NodeMcu_motion_detected
   alias: NodeMcu_motion_detected
   trigger:
@@ -127,7 +173,7 @@
     - condition: sun
       before: sunrise
     - condition: numeric_state
-      entity_id: "sensor.kitchen_light_level"
+      entity_id: sensor.kitchen_light_level
       below: 2.0
   action:
   - data_template:
@@ -154,7 +200,7 @@
     - condition: sun
       before: sunrise
     - condition: numeric_state
-      entity_id: "sensor.kitchen_light_level"
+      entity_id: sensor.kitchen_light_level
       below: 2.0
   action:
   - data_template:
