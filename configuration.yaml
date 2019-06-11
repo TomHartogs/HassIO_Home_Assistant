@@ -13,9 +13,6 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 
-# Show links to resources in log and frontend
-introduction:
-
 # Enables the frontend
 frontend:
 
@@ -75,27 +72,23 @@ logbook:
 google_assistant:
   project_id: !secret google_assistant_project_id
   api_key: !secret google_assistant_api_key
-  #expose_by_default: false
-  #entity_config:
-  #  switch.power_strip:
-  #    name: Power strip
-  #    aliases:
-  #      - Plant light
-  #      - Green light
-  #    expose: true
-    
+  expose_by_default: false
+  exposed_domains:
+    - switch
+    - input_boolean
+    - script
 
 device_tracker:
   #- platform: huawei_router
   #  host: !secret router_ip
   #  username: !secret router_username
   #  password: !secret router_password
-  #  new_device_defaults:
-  #  track_new_devices: False
   - platform: google_maps
     username: !secret google_maps_username
     password: !secret google_maps_password
     max_gps_accuracy: 100
+    
+person:
     
 googlehome:
   devices:
@@ -113,12 +106,17 @@ camera:
     password: !secret camera_password
 
 binary_sensor:
-  - platform: hue
-    scan_interval: 1
+  #- platform: huesensor
+  #  scan_interval: 1
   - platform: mqtt
     name: "Lolin_NodeMCU_v3"
     state_topic: "Lolin_NodeMCU_v3/stat/POWER"
     qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    device_class: "motion"
+  - platform: mqtt
+    state_topic: "cameras/front_door/motion"
     payload_on: "ON"
     payload_off: "OFF"
     device_class: "motion"
@@ -180,7 +178,7 @@ sun:
 # Sensors
 sensor:
   - platform: yr
-  - platform: hue
+  #- platform: huesensor
   - platform: template
     sensors:
       kitchen_temperature:
@@ -199,7 +197,8 @@ media_player:
 
 # Text to speech
 tts:
-  - platform: google
+  - platform: google_translate
+    service_name: google_say
 
 # Cloud
 cloud:
